@@ -1,8 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Footer from "../../Atoms/Footer";
-import Navbar from "../../Atoms/Navbar";
 
 export default function LoginPage() {
   const [data, setData] = useState<any[]>([]);
@@ -26,7 +24,6 @@ export default function LoginPage() {
 
   return (
     <main>
-      <Navbar />
       <div className="flex items-center min-h-screen bg-gray-100">
         <div className="flex-1 h-full max-w-4xl mx-auto bg-white rounded-lg shadow-xl">
           <div className="flex flex-col md:flex-row">
@@ -85,7 +82,6 @@ export default function LoginPage() {
           </div>
         </div>
       </div>
-      <Footer />
     </main>
   );
 }

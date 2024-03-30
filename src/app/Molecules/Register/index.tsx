@@ -1,14 +1,11 @@
 "use client";
 
-import Footer from "../../Atoms/Footer";
-import Navbar from "../../Atoms/Navbar";
 import regimg from "../../Assets/images/regImg.jpg";
 import Image from "next/image";
 
 export default function Register() {
   return (
     <main>
-      <Navbar />
       <div className="flex items-center min-h-screen bg-gray-100">
         <div className="flex-1 h-full max-w-4xl mx-auto bg-white rounded-lg shadow-xl">
           <div className="flex flex-col md:flex-row">
@@ -85,7 +82,6 @@ export default function Register() {
           </div>
         </div>
       </div>
-      <Footer />
     </main>
   );
 }
