@@ -1,16 +1,12 @@
-import knex from "knex";
+import mongoose from "mongoose";
 
-const dbPort: number | undefined = process.env.DB_PORT
-  ? parseInt(process.env.DB_PORT, 10)
-  : undefined;
+const connectToDatabase = async () => {
+  try {
+    await mongoose.connect("mongodb://localhost:27017/your-database-name");
+    console.log("Connected to MongoDB");
+  } catch (error) {
+    console.error("Error connecting to MongoDB:", error);
+  }
+};
 
-export const db = knex({
-  client: "mysql2",
-  connection: {
-    host: process.env.DB_HOST,
-    port: dbPort,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_DATABASE,
-  },
-});
+export default connectToDatabase;

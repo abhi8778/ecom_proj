@@ -1,27 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import useData from "@/app/hooks/useData";
 
 export default function LoginPage() {
-  const [data, setData] = useState<any[]>([]);
+  // const [data, setData] = useState<any[]>([]);
 
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const fetchData = async () => {
-    try {
-      const response = await fetch("/api/page");
-      if (!response.ok) {
-        throw new Error("Failed to fetch data");
-      }
-      const jsonData = await response.json();
-      setData(jsonData);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
-
+  const data = useData();
   return (
     <main>
       <div className="flex items-center min-h-screen bg-gray-100">
