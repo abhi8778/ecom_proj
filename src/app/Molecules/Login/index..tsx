@@ -1,23 +1,46 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import useData from "@/app/hooks/useData";
-
+import { useRouter } from "next/navigation";
+import Image from "next/image";
+import loginImg from "../../Assets/images/th.jpeg";
 export default function LoginPage() {
-  // const [data, setData] = useState<any[]>([]);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errMessage, setErrMessage] = useState("");
+  const router = useRouter();
 
-  const data = useData();
+  async function login(e: any) {
+    e.preventDefault();
+    // try {
+    //   const response = await fetch("http://localhost:3000/api/login", {
+    //     method: "POST",
+    //     body: JSON.stringify({ email, password }),
+    //   });
+    //   const json = await response.json();
+    //   console.log(json);
+    //   router.push("/home");
+    // } catch (error) {}
+    if (email === "asc@gmail.com" && password === "pwd") {
+      router.push("/home");
+      setErrMessage("");
+    } else {
+      setErrMessage("Invalid Credentials");
+    }
+  }
+
   return (
     <main>
       <div className="flex items-center min-h-screen bg-gray-100">
         <div className="flex-1 h-full max-w-4xl mx-auto bg-white rounded-lg shadow-xl">
           <div className="flex flex-col md:flex-row">
             <div className="h-32 md:h-auto md:w-1/2">
-              {/* <img
+              <Image
                 className="object-cover w-full h-full"
-                src="login-image-url.jpg"
-                alt="Login"
-              /> */}
+                src={loginImg}
+                alt="Image Alt Text"
+                priority={true}
+              />
             </div>
             <div className="flex items-center justify-center p-6 sm:p-12 md:w-1/2">
               <div className="w-full">
@@ -29,8 +52,12 @@ export default function LoginPage() {
                     <label className="block text-sm">Email</label>
                     <input
                       type="email"
-                      className="block w-full mt-1 text-sm border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                      className="block w-full mt-1 text-sm border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-gray-900"
                       placeholder="name@example.com"
+                      onChange={(e) => {
+                        console.log(e.target.value);
+                        setEmail(e.target.value);
+                      }}
                     />
                   </div>
 
@@ -38,18 +65,25 @@ export default function LoginPage() {
                     <label className="block text-sm">Password</label>
                     <input
                       type="password"
-                      className="block w-full mt-1 text-sm border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                      className="block w-full mt-1 text-sm border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-gray-900"
                       placeholder="***************"
+                      onChange={(e) => {
+                        setPassword(e.target.value);
+                      }}
                     />
                   </div>
 
                   <div className="mt-6">
                     <button
-                      type="submit"
+                      type="button"
+                      onClick={login}
                       className="w-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-300"
                     >
-                      Log in
+                      Log In
                     </button>
+                    <div className="text-red-400 ">
+                      {errMessage.length > 0 ? errMessage : ""}
+                    </div>
                   </div>
                 </form>
 

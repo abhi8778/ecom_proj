@@ -1,0 +1,24 @@
+import { NextApiRequest, NextApiResponse } from "next";
+import connectDB from "../../db/db";
+import { ProductModel } from "../../db/models/products";
+import { NextRequest, NextResponse } from "next/server";
+
+export async function GET(req: NextRequest, res: NextResponse) {
+  try {
+    await connectDB();
+
+    const query = req.nextUrl.searchParams.get("query");
+    console.log("ksd" + query);
+    const products = await ProductModel.find({
+      $or: [
+        { brandName: { $regex: query, $options: "i" } }, // Case-insensitive search for brand name
+        { productName: { $regex: query, $options: "i" } }, // Case-insensitive search for product name
+      ],
+    });
+    console.log("Hi" + products);
+    return Response.json(products);
+  } catch (error) {
+    console.error("Error fetching products:", error);
+    Response.json({ error: "Internal Server Erro" });
+  }
+}

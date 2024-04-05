@@ -13,7 +13,8 @@ export default function Register() {
               <Image
                 className="object-cover w-full h-full"
                 src={regimg}
-                alt="Register"
+                alt="Image Alt Text"
+                priority={true}
               />
             </div>
             <div className="flex items-center justify-center p-6 sm:p-12 md:w-1/2">
@@ -70,10 +71,7 @@ export default function Register() {
 
                 <p className="mt-4 text-xs text-center text-gray-600">
                   Already have an account?{" "}
-                  <a
-                    href="login.html"
-                    className="text-indigo-600 hover:underline"
-                  >
+                  <a href="/login" className="text-indigo-600 hover:underline">
                     Login here
                   </a>
                 </p>
