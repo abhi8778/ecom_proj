@@ -15,6 +15,7 @@ const CartSlice = createSlice({
   initialState: initialState,
   reducers: {
     addToCart(state, { type, payload }) {
+      console.log(payload);
       state.items.push(payload);
     },
     removeFromCart() {},
@@ -27,10 +28,12 @@ const CartSlice = createSlice({
 });
 
 export const { addToCart, removeFromCart, productItems } = CartSlice.actions;
-export const selectProductItems = (state: RootState) => {
-  console.log(state); // Log the entire state to see its structure
-  console.log(state.cart); // Log the cart slice to see if productItems are present
-  return state.cart.productItems; // Return productItems
-};
+// export const selectProductItems = (state: RootState) => {
+//   console.log(state); // Log the entire state to see its structure
+//   console.log(state.cart); // Log the cart slice to see if productItems are present
+//   return state.cart.productItems; // Return productItems
+// };
+
+export const selectProductItems = (state: { cart: CartState }) => state.cart;
 
 export default CartSlice.reducer;

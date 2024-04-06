@@ -1,9 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
 import CartReducer, { CartState } from "./slices/cart";
+import checkoutCartSlice, {
+  CheckoutState,
+} from "@/app/Molecules/store/slice/cart";
 
 export const makeStore = () => {
   return configureStore({
-    reducer: { cart: CartReducer },
+    reducer: {
+      cart: CartReducer,
+      checkoutCart: checkoutCartSlice,
+    },
   });
 };
 export type AppStore = ReturnType<typeof makeStore>;

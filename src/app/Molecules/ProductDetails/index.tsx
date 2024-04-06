@@ -3,8 +3,14 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { selectProductItems } from "../../lib/store/slices/cart";
+import { useAppDispatch, useAppSelector } from "@/app/lib/hooks/redux";
+import { addToCart } from "../store/slice/cart";
+// import { addToCart } from "../../lib/store/slices/cart";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { RootState } from "../../lib/store/index";
 
 interface Product {
   _id: string;
@@ -22,11 +28,10 @@ interface ProductDetailsProps {
 const ProductDetails: React.FC<ProductDetailsProps> = ({ param }) => {
   const router = useRouter();
   const [products, setProducts] = useState<Product[]>([]);
+  const dispatch = useAppDispatch();
+  //   const prodD = useAppDispatch(selectProductItems);
 
   useEffect(() => {
-    console.log(param);
-    console.log("in");
-
     const getProducts = async (searchId: number) => {
       try {
         const response = await fetch(
@@ -51,6 +56,17 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ param }) => {
     }
   }, [param]);
 
+  const addToCartClient = () => {
+    if (products) {
+      dispatch(addToCart(products));
+      toast("Added to cart successfully", {
+        type: "success",
+        theme: "dark",
+        autoClose: 2000,
+      });
+    }
+  };
+
   return (
     <main>
       <div className="container mx-auto mt-10 ">
@@ -68,14 +84,27 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ param }) => {
                 £{products[0]?.productPrice}
               </span>
             </div>
-            <div className="mt-6">
-              <button className="px-8 py-2 bg-green-500 text-white text-sm font-medium rounded hover:bg-blue-700">
+            <div className="mt-6 flex gap-4">
+              <button
+                className="px-8 py-2 bg-green-500 text-white text-sm font-medium rounded hover:bg-blue-700"
+                onClick={addToCartClient}
+              >
                 Add to Cart
+              </button>
+              <button
+                className="px-8 py-2 bg-green-500 text-white text-sm font-medium rounded hover:bg-blue-700"
+                onClick={() => {
+                  router.push("/checkoutCart");
+                }}
+                type="button"
+              >
+                Go to CArt
               </button>
             </div>
           </div>
         </div>
       </div>
+      <ToastContainer />
     </main>
   );
 };
