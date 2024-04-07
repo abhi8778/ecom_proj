@@ -1,6 +1,6 @@
 "use client";
 import { useEffect } from "react";
-import ProductDetails from "../../../Molecules/ProductDetails/index";
+import ProductDetails from "../../Molecules/ProductDetails/index";
 
 interface ProductDetProps {
   params: { productId: string };

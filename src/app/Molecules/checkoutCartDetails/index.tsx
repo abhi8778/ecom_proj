@@ -1,9 +1,10 @@
 "use client";
 
 import { useEffect } from "react";
-import { useAppSelector } from "@/app/lib/hooks/redux";
-import { cartItemsAvailable } from "../store/slice/cart";
+import { useAppDispatch, useAppSelector } from "@/app/lib/hooks/redux";
+import { removeFromCart, cartItemsAvailable } from "../store/slice/cart";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { removeFromCart } from "../store/slice/cart";
 
 interface Product {
   id: number;

@@ -18,6 +18,14 @@ const checkoutCartSlice = createSlice({
       //   state.cartItems.push(action.payload);
       state.cartItems.push(...action.payload);
     },
+    removeFromCart(state, { type, payload }) {
+      const cartItems = state.cartItems;
+      console.log("items ", cartItems);
+      const newItems = cartItems.filter((item) => item !== payload)
+      console.log("newItems ", newItems);
+      
+    
+  },
   },
 });
 

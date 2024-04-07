@@ -58,7 +58,7 @@ export default function ProductsPage() {
       } else {
         fetchProducts();
       }
-    }, 1000); // Adjust the delay as per your requirement
+    }, 200); // Adjust the delay as per your requirement
     return () => clearTimeout(delayDebounceFn);
   }, [searchText]);
 
@@ -80,23 +80,6 @@ export default function ProductsPage() {
       console.error("Error fetching products:", error);
     }
   }
-  //   useEffect(() => {
-  //     const getProducts = async (searchText: string) => {
-  //       const response = await fetch(
-  //         `/api/searchText?${searchText !== "" ? `query=${searchText}` : ""}`
-  //       );
-
-  //       console.log(response);
-  //       const resp = await response.json();
-  //       console.log(resp);
-  //       setProducts(resp);
-  //     };
-  //     if (searchText !== "") {
-  //       getProducts(searchText);
-  //     } else {
-  //       fetchProducts();
-  //     }
-  //   }, [searchText]);
 
   return (
     <div>
@@ -142,7 +125,7 @@ export default function ProductsPage() {
                       </p> */}
                       <div className="flex items-center flex-wrap ">
                         <a
-                          href={`/products/${e.productId}/products-details`}
+                          href={`/products/${e.productId}`}
                           className="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0"
                         >
                           Learn More

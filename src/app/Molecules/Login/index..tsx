@@ -12,15 +12,19 @@ export default function LoginPage() {
 
   async function login(e: any) {
     e.preventDefault();
-    // try {
-    //   const response = await fetch("http://localhost:3000/api/login", {
-    //     method: "POST",
-    //     body: JSON.stringify({ email, password }),
-    //   });
-    //   const json = await response.json();
-    //   console.log(json);
-    //   router.push("/home");
-    // } catch (error) {}
+    try {
+      const response = await fetch("http://localhost:3000/api/login", {
+        method: "POST",
+        body: JSON.stringify({ email, password }),
+      });
+      const json = await response.json();
+      console.log(json);
+      if(json && json.message === "user logged in"){
+        router.push("/home");
+      }else{
+        setErrMessage("Invalid Credentials");
+      }
+    } catch (error) {}
     if (email === "asc@gmail.com" && password === "pwd") {
       router.push("/home");
       setErrMessage("");
@@ -47,7 +51,7 @@ export default function LoginPage() {
                 <h1 className="mb-4 text-2xl font-bold text-center text-gray-700">
                   Login to Your Account
                 </h1>
-                <form>
+                <form onSubmit={login}>
                   <div>
                     <label className="block text-sm">Email</label>
                     <input

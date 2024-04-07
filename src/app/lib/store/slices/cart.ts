@@ -18,7 +18,14 @@ const CartSlice = createSlice({
       console.log(payload);
       state.items.push(payload);
     },
-    removeFromCart() {},
+    removeFromCart(state, { type, payload }) {
+        const items = state.items;
+        console.log("items ", items);
+        const newItems = items.filter((item) => item !== payload)
+        console.log("newItems ", newItems);
+        
+      
+    },
     productItems(state, { type, payload }) {
       state.productItems.push(payload);
       console.log(state.productItems);
